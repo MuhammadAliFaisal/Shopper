@@ -1,0 +1,28 @@
+.offers{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    margin-top: 100px;
+    width: 70vw;
+    padding: 50px 50px;
+    height: 60vh;
+    background: linear-gradient(180deg,#fde1ff,#e1ffea22 60%);
+}
+.offers-left h1{
+    font-size: 44px;
+}
+.offers-left p{
+    font-weight: 600;
+    margin: 15px 0;
+}
+.offers button{
+    padding: 12px 50px;
+    border-radius: 30px;
+    background-color: red;
+    border: none;
+    color: white;
+}
+.offers img{
+    height: 300px;
+}

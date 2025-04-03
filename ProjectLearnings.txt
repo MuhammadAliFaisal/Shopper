@@ -1,0 +1,166 @@
+Frontend:
+
+==>Dependencies:
+1.react-router-dom (To Enable Routing Among Pages SPA)
+
+
+==>What Is Assets Folder:
+1.It contains all the images , logos , banners, icons used in Whole Website
+But What is allproducts.js,data.js,newcollections.js file inside asstes folder?
+1.First They All Imported All Images Inside It 
+2.Then Created an Array Of Object Which contains All Images With their Descriptions and prices details in one place
+
+Why import images?
+You need images for products, so you import them.
+
+Why create a list or Array of Objects?
+You are storing product details (name, price, category, and image) in one place.
+
+Why export the list?
+You can use this product data anywhere in your project (e.g., to show products on a webpage).
+
+If you don’t use this file, then:
+You won’t have product images – You’ll need to manually import them wherever you need them.
+No structured product data – You’ll have to write product details separately each time.
+More work & repetition – Every time you need product info, you’ll have to type it again, which is time-consuming and messy.
+
+==>Why We Made Context Of ShopContext ?
+Because to Make allproducts centeralized ShopCategory Page Uses allproducts to show men,women,kids category if we wont use Context then it becomes harder we have to seperately import allproducts using props and then show them indivisualy so we Made It Centeralized.
+
+
+
+
+
+
+
+==>FLow of The Project :
+1.All Dependencies
+2.Folder Structure majorly Pages , Components , Context 
+3.Enabling Routes By wrapping app componnet with BrowserRouter Then Introduce Routes and Route inside App.jsx Where All Components Will be Rendered.
+
+
+
+
+
+
+
+
+
+
+
+
+==>Some Important Logics And Standards:
+1.In Componnets Folder We Make Components Used In Pages To Re Use Them and in Pages Section We Create All The Pages Logic That Are All Rendered Inside App.jsx
+2.Navbar Will be Before All Routes so that i can be Available at top of every Route
+2.Footer Will be After All Routes so that i can be Available at Bottom of every Route
+3.We are Using UseState For <hr/> tag onclick we set value and display hr tag dynamically
+4.We created Item Component Only One Time Which Function is To Display Products and Their Data In Cards Format Best For Re Usability 
+5.Then For Data.js , NewCollections.js , allProducts.js We Only have to Map Array of Objct sand send props to Items Componnet which Display Them in Cards Best ReUsability  
+6.A Great Logic
+          <Route path="/men" element={<ShopCategory banner={banner_men} />}></Route>
+          <Route path="/women" element={<ShopCategory banner={banner_women} />}></Route>
+          <Route path="/kid" element={<ShopCategory banner={banner_kid} />}></Route>
+Whenever User Click on men , women or kid  a ShopCategory Page Will Be Opened Which takes Props of Banner which is Dynamic and ShopCategory Page Takes BanerImage Props and Display Them Seperately
+7.ShopContext First We Wrapped App.jsx with This ShopCOntext.jsx Then we Made Context Using Create Context named shopContext and Then we Used it Like ShopContext.Provider to make it centeralized.
+
+
+7.Another Great Logic
+          <Route path="/men" element={<ShopCategory category="men" banner={banner_men} />}></Route>
+          <Route path="/women" element={<ShopCategory category="women" banner={banner_women} />}></Route>
+          <Route path="/kid" element={<ShopCategory category="kid" banner={banner_kid} />}></Route>
+In Tenoon routes p /men,women,/kids tenoon maen page ek hi khulraha ha jo ha ShopCategory But Differnce ajata ha Props se Alg Alg props Bhjdye Takae Tenoon Ka Layput Tu Same ha But Data Different Ha Tenoon maen.Condition lagai k agr props.category == item.category tu hi Item Dikhao tu tenoon Maen Differnet Items Ajaenge.
+
+
+
+
+
+
+==>The Most Useful Logics For E-Commerce :
+1. Cart Page Logic:
+-Ksii Bi Product P CLick Krne K bd Cart Page k Ander Us Product Ka Data Dynamically Lene Klye Sbse Pehli Problem Aegi How Do You Know K Wo Product Konsi Hai.
+-Ab Idher Se Logic Srart Hoti ha Hum allProducts Context se lelenge cart page maen uske bd CartPage Route maen useParams Hook Use krke ProductID Fetch krlenge or allproducts maen find() lagaker Product dhondlenge k user ne knsi product p click kra ha allproducts maen se using productID.
+-Now Product Milgai ha Ab Is Product ko Props k Zariye Different Components maen pass krdenge Takae Product ka Data Show Krskein Dynamically.
+Flow of Cart Logic:
+1.Take allProducts using Context
+2.Find Product using useparams from router
+3.Pass Props In All Componnets You Make
+
+  const {allproducts} = useContext(ShopContext)
+  const {productId} = useParams();
+  const product= allproducts.find((e)=>e.id===Number(productId))
+
+ <Link to={`/product/${props.id}`}><img src={props.image} alt="" /></Link>
+ Item has id prop of every Image so we gave it so that we get id on Product Page and we fetch that id using useParams Hook named productId bcz we created nested Route in product route named /product/:productId so this is how we fetch productId using useParams  const {productId} = useParams(); and then show products after matching Right Product with id. 
+ 
+
+
+ Main Logic Is Cart Logic:
+ 1.Making A Default Cart Object Which Contains AllProducts key and Value is Initialized with 0 so that we can add their value whenever user adds in Cart.
+ 2.Make AddtoCart Function in ShopContext and Whenever user Clicks on add to cart we add in our default cart using product.id.
+ 3.Make RemoveFromCart Function in ShopContext and Whenever user removes from  cart we remove in our default cart using product id.
+
+
+Numeric Data
+const obj = { 1: "Apple", 2: "Banana", 3: "Cherry" };
+console.log(obj[1]); // Output: Apple
+console.log(obj[2]); // Output: Banana
+console.log(obj[3]); // Output: Cherry
+Always use object[key] (bracket notation) to access values with numeric keys.
+
+String Data
+const person = { "full name": "Ali Khan", age: 25 };
+console.log(person["full name"]); // Output: Ali Khan
+console.log(person.fullname); // Output: Ali Khan
+
+In Our Case Numeric Value Because We Made Default Cart With Numeric Indexes
+cartItems[e.id] in cartItems What Quantity Or Value It Contains
+
+[productId] This Gives Key From Exisitng Object
+prev[productId] This Gives Value From Exisitng Object
+
+
+{ ...prev, [productId]: prev[productId] + 1 } is creating a new object.
+The spread operator (...prev) copies existing keys.
+[productId]: prev[productId] + 1 adds/updates a key-value pair inside the new object.
+Since it’s inside an object, we must use : to define key-value pairs.
+
+But When We Got An Empty Cart Object We Are Not Allowed to use (:) Because (:) are only used inside Object Which has Already Keys and values (:)  is used inside object literals (whether new or updating). While (=) is used to Assign New Key and Values to an Object.
+
+
+
+
+
+
+
+
+Objects Learn:
+const obj={
+          name:"Ali",
+          age:22,
+          job:"Developer"
+}
+
+Two Ways to Fetch Values Of Object:
+obj.name      //Ali
+obj.job       //Developer
+obj["name"]   //Ali
+obj["age"]    //22
+
+const obj2={
+          0:"Ali",
+          1:22,
+          2:"Developer"
+}
+obj[1]   //22
+obj[2]   //Developer
+
+console.log(obj.full name); // ❌ Error
+console.log(obj["full name"]); // ✅ "Ali Khan"
+console.log(obj["job-title"]); // ✅ "Software Developer"
+console.log(obj["@specialKey"]); // ✅ "Test Value"
+
+([]) Notation When the key is a number, special character, or stored in a variable
+(.) Notation 	When the key is a valid variable name (e.g., name, job).
+
+
+

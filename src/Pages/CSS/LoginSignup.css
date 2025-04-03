@@ -1,0 +1,48 @@
+.login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: pink;
+}
+.login-container{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 35px 35px;
+}
+.login-container h1{
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+.login-container form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+}
+form input{
+    padding: 12px 20px;
+    
+    
+}
+.login-container button{
+    background-color: red;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 10px 0;
+}
+.login-container p{
+    font-size: 13px;
+    opacity: 0.8;
+    margin: 10px 0;
+}
+.login-container p span{
+    color: #ff1313;
+}
+.logincheck{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
